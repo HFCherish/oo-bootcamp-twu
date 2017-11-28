@@ -10,10 +10,12 @@ public class Mommy {
     public static final List<String> VOVELS = Arrays.asList("a", "e", "i", "o", "u");
 
     public String mommify(String a) {
-        if(VOVELS.contains(a)) {
+
+        if (VOVELS.contains(a)) {
             return "mommy";
         }
 
         return a;
     }
+
 }

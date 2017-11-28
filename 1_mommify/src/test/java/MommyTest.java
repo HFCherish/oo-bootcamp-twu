@@ -23,10 +23,11 @@ public class MommyTest {
      */
     @Test
     public void should_replace_vowel() {
-        assertThat(mommy.mommify("a"), is("mommy"));
+        assertThat(mommy.mommify("a"), is("fdjk"));
         assertThat(mommy.mommify("e"), is("mommy"));
         assertThat(mommy.mommify("o"), is("mommy"));
     }
+
     /**
      * @author pzzheng
      */
@@ -38,4 +39,12 @@ public class MommyTest {
         assertThat(mommy.mommify(null), is(nullValue()));
     }
 
+
+    /**
+     * @author pzzheng
+     */
+    @Test
+    public void should_replace_right_with_multiple_chars() {
+        assertThat(mommy.mommify("what"), is("whmommyt"));
+    }
 }
