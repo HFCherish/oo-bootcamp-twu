@@ -1,7 +1,5 @@
 package com.tw.parkinglot;
 
-import com.tw.parkinglot.Car;
-import com.tw.parkinglot.ParkingLot;
 import org.mockito.Mock;
 
 /**
@@ -12,7 +10,7 @@ public class TestHelper {
     @Mock
     public static Car car;
 
-    public static ParkingLot availableLot() {
+    public static ParkingLot emptyLot1() {
         return new ParkingLot(1);
     }
 

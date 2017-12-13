@@ -18,7 +18,7 @@ public class FirstAvailableSelectorParkingBoyTest {
      */
     @Test
     public void should_park_when_parking_lots_of_the_boy_is_available() {
-        ParkingLot availableLot = TestHelper.availableLot();
+        ParkingLot availableLot = TestHelper.emptyLot1();
         ParkingLot fullLot = TestHelper.fullLot();
         ParkingBoy parkingBoy = new ParkingBoy(firstAvailableSelector, availableLot, fullLot);
 
@@ -33,8 +33,8 @@ public class FirstAvailableSelectorParkingBoyTest {
      */
     @Test
     public void should_park_to_first_avaliable_lot_of_the_boy_when_many_is_available() {
-        ParkingLot availableLot = TestHelper.availableLot();
-        ParkingLot availableLot2 = TestHelper.availableLot();
+        ParkingLot availableLot = TestHelper.emptyLot1();
+        ParkingLot availableLot2 = TestHelper.emptyLot1();
         ParkingBoy parkingBoy = new ParkingBoy(firstAvailableSelector, availableLot, availableLot2);
         assertThat(availableLot.isAvailable(), is(true));
 
@@ -64,7 +64,7 @@ public class FirstAvailableSelectorParkingBoyTest {
      */
     @Test
     public void should_unpark_when_car_is_in_lot_of_the_boy() {
-        ParkingBoy parkingBoy = new ParkingBoy(firstAvailableSelector, TestHelper.availableLot(), TestHelper.fullLot());
+        ParkingBoy parkingBoy = new ParkingBoy(firstAvailableSelector, TestHelper.emptyLot1(), TestHelper.fullLot());
         parkingBoy.park(TestHelper.car);
         assertThat(parkingBoy.isAvailable(), is(false));
 
@@ -79,7 +79,7 @@ public class FirstAvailableSelectorParkingBoyTest {
      */
     @Test
     public void should_not_unpark_is_car_is_not_in_any_lots_of_the_boy() {
-        ParkingBoy parkingBoy = new ParkingBoy(firstAvailableSelector, TestHelper.availableLot(), TestHelper.fullLot());
+        ParkingBoy parkingBoy = new ParkingBoy(firstAvailableSelector, TestHelper.emptyLot1(), TestHelper.fullLot());
 
         Boolean status = parkingBoy.unpark(TestHelper.car);
 
