@@ -23,7 +23,7 @@ public class MostVacancySelectorTest {
      * @author pzzheng
      */
     @Test
-    public void should_park_to_lot_with_most_vacancy_of_the_boy() {
+    public void should_get_lot_with_most_vacancy() {
         ParkingLot moreVacancyLot = new ParkingLot(2);
         ParkingLot lessVacancyLot = new ParkingLot(1);
         Optional<ParkingLot> selected = mostVacancySelector.getLot(Arrays.asList(moreVacancyLot, lessVacancyLot));
@@ -35,7 +35,7 @@ public class MostVacancySelectorTest {
      * @author pzzheng
      */
     @Test
-    public void should_park_when_all_lots_with_same_vacancy() {
+    public void should_get_one_lot_when_all_lots_with_same_vacancy() {
         assertThat(mostVacancySelector.getLot(Arrays.asList(new ParkingLot(1), new ParkingLot(1))).isPresent(), is(true));
     }
 
@@ -44,7 +44,7 @@ public class MostVacancySelectorTest {
      * @author pzzheng
      */
     @Test
-    public void should_not_park_if_all_lots_of_the_boy_is_not_available() {
+    public void should_not_get_lot_if_all_lots_are_not_available() {
         assertThat(mostVacancySelector.getLot(Arrays.asList(fullLot(), fullLot())).isPresent(), is(false));
     }
 
