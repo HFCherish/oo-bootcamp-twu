@@ -1,7 +1,6 @@
 package com.tw.parkinglot;
 
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -16,8 +15,6 @@ import static org.junit.Assert.assertThat;
  * @date 12/12/17
  */
 public class MostVacancySelectorTest {
-    @Mock
-    Car car;
 
     /**
      * @author pzzheng
@@ -26,7 +23,9 @@ public class MostVacancySelectorTest {
     public void should_get_lot_with_most_vacancy() {
         ParkingLot moreVacancyLot = new ParkingLot(2);
         ParkingLot lessVacancyLot = new ParkingLot(1);
+
         Optional<ParkingLot> selected = mostVacancySelector.getLot(Arrays.asList(moreVacancyLot, lessVacancyLot));
+
         assertThat(selected.isPresent(), is(true));
         assertThat(selected.get(), is(moreVacancyLot));
     }

@@ -40,4 +40,8 @@ public class ParkingLot implements WithParkAvailability{
     public Boolean contains(Car car) {
         return cars.contains(car);
     }
+
+    public double getUsageRate() {
+        return getRemained() / (capacity * 1.0);
+    }
 }
