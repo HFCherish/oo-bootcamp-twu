@@ -1,13 +1,16 @@
 package com.tw.parkinglot;
 
 import java.util.HashSet;
+import java.util.Set;
+
+import static com.tw.parkinglot.ParkingLot.Usage.isAvailable;
 
 /**
  * @author pzzheng
  * @date 12/12/17
  */
 public class ParkingLot implements WithParkAvailability{
-    private final HashSet<Car> cars;
+    private final Set<Car> cars;
     private Integer capacity;
 
     public ParkingLot(Integer capacity) {
@@ -15,8 +18,16 @@ public class ParkingLot implements WithParkAvailability{
         cars = new HashSet<>(capacity);
     }
 
-    public Integer getRemained() {
-        return capacity - cars.size();
+    public <T> T usageStatistics(Usage<T> usage) {
+        return usage.getStatistics(capacity, cars.size());
+    }
+
+    public interface Usage<T> {
+        Usage<Integer> remained = (c, u) -> c - u;
+        Usage<Double> vacancyRate = (c, u) -> remained.getStatistics(c, u) / (c * 1.0);
+        Usage<Boolean> isAvailable = (c, u) -> remained.getStatistics(c, u) > 0;
+
+        T getStatistics(Integer capacity, Integer used);
     }
 
     /**
@@ -30,7 +41,7 @@ public class ParkingLot implements WithParkAvailability{
     }
 
     public Boolean isAvailable() {
-        return getRemained() > 0;
+        return usageStatistics(isAvailable);
     }
 
     public Boolean unpark(Car car) {
@@ -41,7 +52,4 @@ public class ParkingLot implements WithParkAvailability{
         return cars.contains(car);
     }
 
-    public double getUsageRate() {
-        return getRemained() / (capacity * 1.0);
-    }
 }

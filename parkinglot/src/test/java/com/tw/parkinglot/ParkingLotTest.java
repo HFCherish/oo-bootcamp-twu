@@ -3,6 +3,7 @@ package com.tw.parkinglot;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.tw.parkinglot.ParkingLot.Usage.remained;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -27,12 +28,12 @@ public class ParkingLotTest {
 
     @Test
     public void should_park_when_lot_is_available() {
-        assertThat(parkingLot.getRemained(), is(CAPACITY));
+        assertThat(parkingLot.usageStatistics(remained), is(CAPACITY));
 
         status = parkingLot.park(car);
 
         assertThat(status, is(true));
-        assertThat(parkingLot.getRemained(), is(CAPACITY - 1));
+        assertThat(parkingLot.usageStatistics(remained), is(CAPACITY - 1));
     }
 
     /**
@@ -41,12 +42,12 @@ public class ParkingLotTest {
     @Test
     public void should_not_park_when_lot_not_available() {
         status = parkingLot.park(car);
-        assertThat(parkingLot.getRemained(), is(0));
+        assertThat(parkingLot.usageStatistics(remained), is(0));
 
         status = parkingLot.park(new Car());
 
         assertThat(status, is(false));
-        assertThat(parkingLot.getRemained(), is(0));
+        assertThat(parkingLot.usageStatistics(remained), is(0));
     }
 
     /**
@@ -55,12 +56,12 @@ public class ParkingLotTest {
     @Test
     public void should_unpark_when_car_is_in_lot() {
         parkingLot.park(car);
-        assertThat(parkingLot.getRemained(), is(0));
+        assertThat(parkingLot.usageStatistics(remained), is(0));
 
         status = parkingLot.unpark(car);
 
         assertThat(status, is(true));
-        assertThat(parkingLot.getRemained(), is(CAPACITY));
+        assertThat(parkingLot.usageStatistics(remained), is(CAPACITY));
     }
 
     /**
