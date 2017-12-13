@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>1_mommify</module>
+        <module>parkinglot</module>
     </modules>
 
     <properties>
@@ -36,7 +37,7 @@
 
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+            <artifactId>mockito-core</artifactId>
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
