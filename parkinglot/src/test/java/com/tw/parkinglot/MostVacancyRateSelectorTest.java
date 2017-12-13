@@ -1,15 +1,14 @@
 package com.tw.parkinglot;
 
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.Arrays;
 import java.util.Optional;
 
-import static com.tw.parkinglot.LotSelector.mostVacancySelector;
-import static com.tw.parkinglot.TestHelper.fullLot;
+import static com.tw.parkinglot.LotSelector.mostVacancyRateSelector;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * @author pzzheng
@@ -17,30 +16,33 @@ import static org.junit.Assert.assertThat;
  */
 public class MostVacancyRateSelectorTest {
 
-    @Mock
-    Car car;
     /**
      * @author pzzheng
      */
     @Test
     public void should_get_lot_with_most_vacancy() {
-        ParkingLot lessVacancyRateLot = new ParkingLot(2);
-        lessVacancyRateLot.park(car);
+        ParkingLot lessVacancyRateLot = lotWithHalfVacancyRate();
         ParkingLot biggerVacancyRateLot = new ParkingLot(1);
 
-        Optional<ParkingLot> selected = LotSelector.mostVacancyRateSelector.getLot(Arrays.asList(lessVacancyRateLot, biggerVacancyRateLot));
+        Optional<ParkingLot> selected = mostVacancyRateSelector.getLot(Arrays.asList(lessVacancyRateLot, biggerVacancyRateLot));
 
         assertThat(selected.isPresent(), is(true));
         assertThat(selected.get(), is(biggerVacancyRateLot));
     }
 
-//    /**
-//     * @author pzzheng
-//     */
-//    @Test
-//    public void should_get_one_lot_when_all_lots_with_same_vacancy() {
-//        assertThat(mostVacancySelector.getLot(Arrays.asList(new ParkingLot(1), new ParkingLot(1))).isPresent(), is(true));
-//    }
+    private ParkingLot lotWithHalfVacancyRate() {
+        ParkingLot lessVacancyRateLot = new ParkingLot(2);
+        lessVacancyRateLot.park(mock(Car.class));
+        return lessVacancyRateLot;
+    }
+
+    /**
+     * @author pzzheng
+     */
+    @Test
+    public void should_get_one_lot_when_all_lots_with_same_vacancy_rate() {
+        assertThat(mostVacancyRateSelector.getLot(Arrays.asList(lotWithHalfVacancyRate(), lotWithHalfVacancyRate())).isPresent(), is(true));
+    }
 //
 //
 //    /**

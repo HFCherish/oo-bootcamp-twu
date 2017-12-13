@@ -16,4 +16,3 @@ public interface LotSelector {
 
     Optional<ParkingLot> getLot(List<ParkingLot> parkingLots);
 }
-;
