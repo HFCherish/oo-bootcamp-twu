@@ -1,76 +1,29 @@
 package com.tw.parkinglot;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import static com.tw.parkinglot.ParkingLot.Usage.remained;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * @author pzzheng
- * @date 12/12/17
+ * @date 12/14/17
  */
 public class ParkingLotTest {
-    private static final Integer CAPACITY = 1;
-    private WithParkAvailability parkingLot;
-    private Car car;
-    private Boolean status;
-
     /**
      * @author pzzheng
      */
-    @Before
-    public void setUp() {
-        parkingLot = new ParkingLot(CAPACITY);
-        car = new Car();
-    }
-
     @Test
     public void should_park_when_lot_is_available() {
-        assertThat(parkingLot.usageStatistics(remained), is(CAPACITY));
+        ParkingLot parkingLot = new ParkingLot(1);
+//        assertThat(parkingLot.isAvailable(), is(true));
 
-        status = parkingLot.park(car);
-
-        assertThat(status, is(true));
-        assertThat(parkingLot.usageStatistics(remained), is(CAPACITY - 1));
-    }
-
-    /**
-     * @author pzzheng
-     */
-    @Test
-    public void should_not_park_when_lot_not_available() {
-        status = parkingLot.park(car);
-        assertThat(parkingLot.usageStatistics(remained), is(0));
-
-        status = parkingLot.park(new Car());
-
-        assertThat(status, is(false));
-        assertThat(parkingLot.usageStatistics(remained), is(0));
-    }
-
-    /**
-     * @author pzzheng
-     */
-    @Test
-    public void should_unpark_when_car_is_in_lot() {
-        parkingLot.park(car);
-        assertThat(parkingLot.usageStatistics(remained), is(0));
-
-        status = parkingLot.unpark(car);
+        boolean status = parkingLot.park(mock(Car.class));
 
         assertThat(status, is(true));
-        assertThat(parkingLot.usageStatistics(remained), is(CAPACITY));
+//        assertThat(parkingLot.isAvailable(), is(false));
     }
 
-    /**
-     * @author pzzheng
-     */
-    @Test
-    public void should_not_unpark_when_car_is_not_in_lot() {
-        status = parkingLot.unpark(car);
 
-        assertThat(status, is(false));
-    }
 }
