@@ -28,13 +28,17 @@ public class ParkingLotTest {
      */
     @Test
     public void should_park_when_lot_is_available() {
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = emptyLot1();
         assertThat(parkingLot.isAvailable(), is(true));
 
         boolean status = parkingLot.park(car);
 
         assertThat(status, is(true));
         assertThat(parkingLot.isAvailable(), is(false));
+    }
+
+    private ParkingLot emptyLot1() {
+        return new ParkingLot(1);
     }
 
     /**
@@ -47,6 +51,29 @@ public class ParkingLotTest {
 
         Boolean status = parkingLot.park(car);
 
+        assertThat(status, is(false));
+    }
+
+    /**
+     * @author pzzheng
+     */
+    @Test
+    public void should_unpark_when_is_in_lot() {
+        ParkingLot parkingLot = emptyLot1();
+        parkingLot.park(car);
+
+        boolean status = parkingLot.unpark(car);
+        assertThat(status, is(true));
+    }
+
+    /**
+     * @author pzzheng
+     */
+    @Test
+    public void should_not_unpark_when_is_not_in_lot() {
+        ParkingLot parkingLot = emptyLot1();
+
+        Boolean status = parkingLot.unpark(car);
         assertThat(status, is(false));
     }
 }

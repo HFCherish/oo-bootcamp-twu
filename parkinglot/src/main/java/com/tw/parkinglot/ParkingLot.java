@@ -26,4 +26,8 @@ public class ParkingLot {
         }
         return false;
     }
+
+    public Boolean unpark(Car car) {
+        return cars.remove(car);
+    }
 }
