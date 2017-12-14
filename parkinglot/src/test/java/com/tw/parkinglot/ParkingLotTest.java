@@ -3,6 +3,7 @@ package com.tw.parkinglot;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.tw.parkinglot.TestHelper.emptyLot1;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -35,10 +36,6 @@ public class ParkingLotTest {
 
         assertThat(status, is(true));
         assertThat(parkingLot.isAvailable(), is(false));
-    }
-
-    private ParkingLot emptyLot1() {
-        return new ParkingLot(1);
     }
 
     /**
