@@ -10,11 +10,11 @@ public class TestHelper {
     @Mock
     public static Car car;
 
-    public static ParkingLot emptyLot1() {
+    public static WithParkAvailability emptyLot1() {
         return new ParkingLot(1);
     }
 
-    public static ParkingLot fullLot() {
+    public static WithParkAvailability fullLot() {
         return new ParkingLot(0);
     }
 }

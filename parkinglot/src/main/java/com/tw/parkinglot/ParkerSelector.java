@@ -17,5 +17,5 @@ public interface ParkerSelector {
     ParkerSelector firstAvailableSelector = parkingLots ->  parkingLots.stream().filter(parkingLot -> parkingLot.isAvailable()).findFirst();
     ParkerSelector mostVacancyRateSelector = parkingLots -> parkingLots.stream().max(Comparator.comparingDouble(parkingLot -> parkingLot.usageStatistics(vacancyRate))).filter(parkingLot -> parkingLot.isAvailable());
 
-    Optional<ParkingLot> getLot(List<ParkingLot> parkingLots);
+    Optional<WithParkAvailability> getParker(List<WithParkAvailability> parkingLots);
 }

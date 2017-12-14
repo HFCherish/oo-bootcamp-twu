@@ -13,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class ParkingLotTest {
     private static final Integer CAPACITY = 1;
-    private ParkingLot parkingLot;
+    private WithParkAvailability parkingLot;
     private Car car;
     private Boolean status;
 

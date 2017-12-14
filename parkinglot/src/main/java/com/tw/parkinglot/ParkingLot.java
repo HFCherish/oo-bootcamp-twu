@@ -18,6 +18,7 @@ public class ParkingLot implements WithParkAvailability{
         cars = new HashSet<>(capacity);
     }
 
+    @Override
     public <T> T usageStatistics(Usage<T> usage) {
         return usage.getStatistics(capacity, cars.size());
     }

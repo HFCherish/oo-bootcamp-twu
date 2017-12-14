@@ -23,17 +23,17 @@ public class MostVacancyRateSelectorTest {
      */
     @Test
     public void should_get_lot_with_most_vacancy() {
-        ParkingLot lessVacancyRateLot = lotWithHalfVacancyRate();
-        ParkingLot biggerVacancyRateLot = emptyLot1();
+        WithParkAvailability lessVacancyRateLot = lotWithHalfVacancyRate();
+        WithParkAvailability biggerVacancyRateLot = emptyLot1();
 
-        Optional<ParkingLot> selected = mostVacancyRateSelector.getLot(Arrays.asList(lessVacancyRateLot, biggerVacancyRateLot));
+        Optional<WithParkAvailability> selected = mostVacancyRateSelector.getParker(Arrays.asList(lessVacancyRateLot, biggerVacancyRateLot));
 
         assertThat(selected.isPresent(), is(true));
         assertThat(selected.get(), is(biggerVacancyRateLot));
     }
 
-    private ParkingLot lotWithHalfVacancyRate() {
-        ParkingLot lessVacancyRateLot = new ParkingLot(2);
+    private WithParkAvailability lotWithHalfVacancyRate() {
+        WithParkAvailability lessVacancyRateLot = new ParkingLot(2);
         lessVacancyRateLot.park(mock(Car.class));
         return lessVacancyRateLot;
     }
@@ -43,7 +43,7 @@ public class MostVacancyRateSelectorTest {
      */
     @Test
     public void should_get_one_lot_when_all_lots_with_same_vacancy_rate() {
-        assertThat(mostVacancyRateSelector.getLot(Arrays.asList(lotWithHalfVacancyRate(), lotWithHalfVacancyRate())).isPresent(), is(true));
+        assertThat(mostVacancyRateSelector.getParker(Arrays.asList(lotWithHalfVacancyRate(), lotWithHalfVacancyRate())).isPresent(), is(true));
     }
 
 
@@ -52,7 +52,7 @@ public class MostVacancyRateSelectorTest {
      */
     @Test
     public void should_not_get_lot_if_all_lots_are_not_available() {
-        assertThat(mostVacancyRateSelector.getLot(Arrays.asList(fullLot(), fullLot())).isPresent(), is(false));
+        assertThat(mostVacancyRateSelector.getParker(Arrays.asList(fullLot(), fullLot())).isPresent(), is(false));
     }
 
 
