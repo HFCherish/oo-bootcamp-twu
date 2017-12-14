@@ -1,21 +1,30 @@
 package com.tw.parkinglot;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author pzzheng
  * @date 12/14/17
  */
 public class ParkingBoy {
-    private ParkingLot parkingLot;
+    protected List<ParkingLot> parkingLots;
 
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+    public ParkingBoy(ParkingLot... parkingLots) {
+        this.parkingLots = Arrays.asList(parkingLots);
     }
 
     public Boolean isAvailable() {
-        return parkingLot.isAvailable();
+        return parkingLots.stream().anyMatch(parkingLot -> parkingLot.isAvailable());
     }
 
     public Boolean park(Car car) {
-        return parkingLot.park(car);
+        return parkingLots.stream().filter(parkingLot -> parkingLot.isAvailable()).findFirst()
+                .map(parkingLot -> parkingLot.park(car))
+                .orElse(false);
+    }
+
+    public Boolean unpark(Car car) {
+        return parkingLots.stream().anyMatch(parkingLot -> parkingLot.unpark(car));
     }
 }

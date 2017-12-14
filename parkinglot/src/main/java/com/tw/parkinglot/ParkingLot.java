@@ -13,7 +13,7 @@ public class ParkingLot {
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
-        cars = new HashSet(capacity);
+        cars = new HashSet<>(capacity);
     }
 
     public Boolean isAvailable() {
@@ -29,5 +29,9 @@ public class ParkingLot {
 
     public Boolean unpark(Car car) {
         return cars.remove(car);
+    }
+
+    public Integer remainedNumber() {
+        return capacity - cars.size();
     }
 }
