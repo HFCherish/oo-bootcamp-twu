@@ -8,10 +8,12 @@ import java.util.List;
  * @date 12/14/17
  */
 public class ParkingBoy {
+    protected final LotSelector lotSelector;
     protected List<ParkingLot> parkingLots;
 
-    public ParkingBoy(ParkingLot... parkingLots) {
+    public ParkingBoy(LotSelector lotSelector, ParkingLot... parkingLots) {
         this.parkingLots = Arrays.asList(parkingLots);
+        this.lotSelector = lotSelector;
     }
 
     public Boolean isAvailable() {
@@ -19,7 +21,7 @@ public class ParkingBoy {
     }
 
     public Boolean park(Car car) {
-        return parkingLots.stream().filter(parkingLot -> parkingLot.isAvailable()).findFirst()
+        return lotSelector.getLot(parkingLots)
                 .map(parkingLot -> parkingLot.park(car))
                 .orElse(false);
     }

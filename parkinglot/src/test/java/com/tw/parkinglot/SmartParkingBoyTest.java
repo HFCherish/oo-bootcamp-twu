@@ -2,6 +2,7 @@ package com.tw.parkinglot;
 
 import org.junit.Test;
 
+import static com.tw.parkinglot.LotSelector.mostVacancySelector;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -18,7 +19,7 @@ public class SmartParkingBoyTest {
     public void should_park_to_the_lot_with_most_vacancy() {
         ParkingLot lessVacancyLot = TestHelper.emptyLot1();
         ParkingLot mostVacancyLot = new ParkingLot(2);
-        ParkingBoy smartParkingBoy = new SmartParkingBoy(lessVacancyLot, mostVacancyLot);
+        ParkingBoy smartParkingBoy = new ParkingBoy(mostVacancySelector, lessVacancyLot, mostVacancyLot);
         assertThat(lessVacancyLot.isAvailable(), is(true));
         assertThat(mostVacancyLot.remainedNumber(), is(2));
 
