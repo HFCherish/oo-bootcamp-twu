@@ -2,7 +2,7 @@ package com.tw.parkinglot;
 
 import org.junit.Test;
 
-import static com.tw.parkinglot.LotSelector.firstAvailableSelector;
+import static com.tw.parkinglot.ParkerSelector.firstAvailableSelector;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

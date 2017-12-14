@@ -10,11 +10,11 @@ import java.util.List;
  */
 public class ParkingBoy implements WithParkAvailability {
     protected final List<ParkingLot> parkingLots;
-    protected final LotSelector lotSelector;
+    protected final ParkerSelector parkerSelector;
 
-    public ParkingBoy(LotSelector lotSelector, ParkingLot... parkingLots) {
+    public ParkingBoy(ParkerSelector parkerSelector, ParkingLot... parkingLots) {
         this.parkingLots = Arrays.asList(parkingLots);
-        this.lotSelector = lotSelector;
+        this.parkerSelector = parkerSelector;
     }
 
     protected List<ParkingLot> getParkingLots() {
@@ -23,7 +23,7 @@ public class ParkingBoy implements WithParkAvailability {
 
     @Override
     public Boolean park(Car car) {
-        return lotSelector.getLot(parkingLots)
+        return parkerSelector.getLot(parkingLots)
                 .map(parkingLot -> parkingLot.park(car))
                 .orElse(false);
     }

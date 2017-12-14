@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static com.tw.parkinglot.LotSelector.mostVacancySelector;
+import static com.tw.parkinglot.ParkerSelector.mostVacancySelector;
 import static com.tw.parkinglot.TestHelper.fullLot;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
